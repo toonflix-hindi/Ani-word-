@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Aniworld</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Login Section -->
+    <div id="loginSection" style="display:none; justify-content:center; align-items:center; height:100vh;">
+        <div class="admin-container" style="max-width:400px; text-align:center; background:#1a1a1a; padding:30px; border-radius:10px;">
+            <h2 style="margin-bottom:20px;">Admin Login</h2>
+            <input type="email" id="adminEmail" placeholder="Email" style="width:100%; padding:10px; margin:10px 0; background:#333; border:none; color:white; border-radius:5px;">
+            <input type="password" id="adminPass" placeholder="Password" style="width:100%; padding:10px; margin:10px 0; background:#333; border:none; color:white; border-radius:5px;">
+            <button class="btn" onclick="loginAdmin()" style="width:100%; margin-top:10px;">Login</button>
+        </div>
+    </div>
+
+    <!-- Admin Panel Section -->
+    <div id="adminPanel" style="display:none;">
+        <nav>
+            <div class="logo">Aniworld Admin</div>
+            <button class="btn" onclick="logoutAdmin()" style="padding:5px 15px;">Logout</button>
+        </nav>
+        <div class="admin-container">
+            <!-- AniList Auto Fetch -->
+            <h2>🔍 Search Anime from AniList API</h2>
+            <div style="display:flex; gap:10px; margin-bottom:20px;">
+                <input type="text" id="anilistSearch" placeholder="Enter anime name..." style="flex:1; padding:10px; background:#333; border:none; color:white; border-radius:5px;">
+                <button class="btn" onclick="fetchAniList()">Search API</button>
+            </div>
+
+            <!-- Manual Add/Edit Form -->
+            <h2 style="margin-top:20px;">➕ Add/Edit Anime Manually</h2>
+            <div class="admin-form" style="background:#1a1a1a; padding:20px; border-radius:10px; margin-top:10px;">
+                <input type="hidden" id="editId">
+                <input type="text" id="title" placeholder="Anime Title" style="width:100%; padding:10px; margin:5px 0; background:#333; border:none; color:white; border-radius:5px;">
+                <input type="text" id="poster" placeholder="Poster Image URL" style="width:100%; padding:10px; margin:5px 0; background:#333; border:none; color:white; border-radius:5px;">
+                <input type="text" id="rating" placeholder="Rating (e.g. 8.5)" style="width:100%; padding:10px; margin:5px 0; background:#333; border:none; color:white; border-radius:5px;">
+                <input type="text" id="language" placeholder="Language (e.g. Hindi)" style="width:100%; padding:10px; margin:5px 0; background:#333; border:none; color:white; border-radius:5px;">
+                <input type="text" id="category" placeholder="Category (e.g. Action, Drama)" style="width:100%; padding:10px; margin:5px 0; background:#333; border:none; color:white; border-radius:5px;">
+                <textarea id="description" placeholder="Description" style="width:100%; padding:10px; margin:5px 0; background:#333; border:none; color:white; border-radius:5px; height:80px;"></textarea>
+                <label style="display:block; margin:10px 0;"><input type="checkbox" id="isNew"> Mark as New</label>
+                <button class="btn" onclick="saveAnime()">Save Anime</button>
+                <button class="btn" style="background:#333;" onclick="clearForm()">Clear Form</button>
+            </div>
+
+            <!-- Existing Anime List -->
+            <h2 style="margin-top:30px;">📚 Manage Existing Anime</h2>
+            <div class="admin-list" id="adminList" style="margin-top:10px;"></div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

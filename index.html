@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aniworld - Anime Streaming</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">Aniworld</div>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search anime...">
+            <button onclick="searchAnime()">Search</button>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#schedule">Schedule</a>
+        </div>
+    </nav>
+
+    <!-- Hero Slider (Changes every 5 seconds) -->
+    <div class="hero" id="heroSlider">
+        <!-- JS slides inject karega -->
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Schedule Section -->
+        <div id="schedule" style="margin-bottom: 30px;">
+            <div class="section-title">📅 Upcoming Schedule</div>
+            <div class="anime-grid" id="scheduleGrid">
+                <p style="color:#aaa;">No upcoming anime scheduled yet.</p>
+            </div>
+        </div>
+
+        <!-- Anime Sections (Auto categorized) -->
+        <div id="animeSections">
+            <!-- JS yahan cards banayega -->
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="animeModal">
+        <div class="modal-content">
+            <img id="modalPoster" src="" alt="Poster">
+            <h2 id="modalTitle" style="margin:10px 0;"></h2>
+            <p id="modalDesc" style="font-size:14px; color:#ccc; margin-bottom:15px;"></p>
+            <button class="btn" id="watchBtn">Watch Now</button>
+            <button class="btn" style="background:#333;" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <!-- Firebase & App Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
