@@ -1,0 +1,589 @@
+/* =========================================
+   1. ROOT VARIABLES & GLOBAL RESET
+   ========================================= */
+:root {
+    --primary-red: #e50914;
+    --primary-red-hover: #b2070f;
+    --bg-dark: #0f0f0f;
+    --bg-card: #1a1a1a;
+    --bg-input: #2a2a2a;
+    --text-main: #ffffff;
+    --text-muted: #aaaaaa;
+    --text-gold: #f1c40f;
+    --badge-blue: #2980b9;
+    --badge-green: #27ae60;
+    --badge-orange: #f39c12;
+    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.7);
+    --shadow-red: 0 4px 15px rgba(229, 9, 20, 0.4);
+    --border-radius: 12px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; transition: var(--transition); }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: var(--primary-red); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary-red-hover); }
+
+/* =========================================
+   2. NAVBAR (Header)
+   ========================================= */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--primary-red);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: var(--bg-input);
+    border-radius: 30px;
+    padding: 5px 15px;
+    border: 1px solid #333;
+    transition: var(--transition);
+}
+
+.search-bar:focus-within {
+    border-color: var(--primary-red);
+    box-shadow: 0 0 8px rgba(229, 9, 20, 0.5);
+}
+
+.search-bar input {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    outline: none;
+    padding: 8px;
+    width: 220px;
+    font-size: 14px;
+}
+
+.search-bar button {
+    background: var(--primary-red);
+    border: none;
+    color: white;
+    padding: 6px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: var(--transition);
+}
+
+.search-bar button:hover { background: var(--primary-red-hover); }
+
+.nav-links { display: flex; gap: 25px; }
+.nav-links a { font-weight: 600; font-size: 15px; color: var(--text-main); }
+.nav-links a:hover { color: var(--primary-red); }
+
+/* =========================================
+   3. HERO SLIDER (Home Page)
+   ========================================= */
+.hero {
+    height: 450px;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+}
+
+.hero-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-slide::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: linear-gradient(to top, var(--bg-dark), transparent);
+}
+
+.hero-slide.active { opacity: 1; }
+
+.hero-overlay {
+    position: absolute;
+    bottom: 40px;
+    left: 5%;
+    z-index: 10;
+    max-width: 600px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px 30px;
+    border-radius: var(--border-radius);
+    border-left: 5px solid var(--primary-red);
+    backdrop-filter: blur(5px);
+}
+
+.hero-overlay h2 { font-size: 32px; margin-bottom: 8px; color: var(--text-main); }
+.hero-overlay p { font-size: 16px; color: var(--text-gold); font-weight: bold; }
+
+/* =========================================
+   4. CONTAINER & SECTIONS
+   ========================================= */
+.container { padding: 30px 5%; max-width: 1400px; margin: auto; }
+
+.section-title {
+    font-size: 22px;
+    margin: 30px 0 20px 0;
+    border-left: 5px solid var(--primary-red);
+    padding-left: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* =========================================
+   5. ANIME GRID & CARDS
+   ========================================= */
+.anime-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 20px;
+}
+
+.anime-card {
+    background: var(--bg-card);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    border: 1px solid #222;
+}
+
+.anime-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(229, 9, 20, 0.3);
+    border-color: var(--primary-red);
+}
+
+.anime-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.anime-card:hover img { opacity: 0.8; }
+
+.card-info { padding: 12px; text-align: center; }
+
+.card-info h3 {
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+/* Card Badges */
+.rating {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.85);
+    color: var(--text-gold);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    backdrop-filter: blur(4px);
+    z-index: 2;
+}
+
+.new-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--primary-red);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    z-index: 2;
+    animation: pulse 1.5s infinite;
+}
+
+.lang-badge {
+    position: absolute;
+    top: 42px;
+    left: 10px;
+    background: var(--badge-blue);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: bold;
+    z-index: 2;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* =========================================
+   6. MODAL (Pop-up)
+   ========================================= */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    padding: 20px;
+}
+
+.modal-content {
+    background: var(--bg-card);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    max-width: 450px;
+    width: 100%;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid #333;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-content img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.modal-content h2 { font-size: 22px; margin-bottom: 10px; }
+.modal-content p { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; text-align: left; }
+
+/* =========================================
+   7. BUTTONS (Global)
+   ========================================= */
+.btn {
+    background: var(--primary-red);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+    transition: var(--transition);
+    display: inline-block;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(229, 9, 20, 0.3);
+}
+
+.btn:hover {
+    background: var(--primary-red-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-red);
+}
+
+.btn-secondary { background: #333; box-shadow: none; }
+.btn-secondary:hover { background: #444; }
+
+/* =========================================
+   8. ANIME DETAILS PAGE
+   ========================================= */
+#detailsContainer {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid #222;
+}
+
+#detailsContainer img {
+    width: 280px;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+}
+
+#detailsContainer .details-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+#detailsContainer h1 {
+    font-size: 36px;
+    margin-bottom: 15px;
+    color: var(--text-main);
+}
+
+#detailsContainer .meta-info {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: var(--text-gold);
+    font-size: 16px;
+}
+
+#detailsContainer p {
+    color: #ddd;
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+/* Episode List */
+.episode-list { margin-top: 40px; }
+.episode-item {
+    background: var(--bg-input);
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #333;
+    transition: var(--transition);
+}
+
+.episode-item:hover {
+    border-color: var(--primary-red);
+    background: #222;
+    transform: translateX(5px);
+}
+
+.episode-item span { font-weight: bold; font-size: 16px; }
+
+/* =========================================
+   9. WATCH PAGE (Video Player)
+   ========================================= */
+.watch-header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.watch-header h2 {
+    font-size: 26px;
+    color: var(--text-main);
+    margin-bottom: 10px;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    background: #000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    border: 1px solid #333;
+    margin-bottom: 25px;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.watch-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* =========================================
+   10. ADMIN PANEL
+   ========================================= */
+/* Login Card */
+#loginSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: radial-gradient(circle at center, #1a1a1a, #000);
+}
+
+.login-card {
+    background: var(--bg-card);
+    padding: 40px;
+    border-radius: var(--border-radius);
+    width: 100%;
+    max-width: 400px;
+    box-shadow: var(--shadow-lg);
+    border-top: 5px solid var(--primary-red);
+    text-align: center;
+}
+
+.login-card h2 { margin-bottom: 25px; font-size: 28px; color: var(--primary-red); }
+
+/* Admin Form Inputs */
+.admin-form input, .admin-form textarea, .admin-form select {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 8px 0;
+    background: var(--bg-input);
+    border: 1px solid #444;
+    color: white;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: var(--transition);
+}
+
+.admin-form input:focus, .admin-form textarea:focus {
+    border-color: var(--primary-red);
+    box-shadow: 0 0 8px rgba(229, 9, 20, 0.4);
+}
+
+.admin-container {
+    padding: 30px 5%;
+    max-width: 900px;
+    margin: auto;
+}
+
+/* Admin List */
+.admin-list { margin-top: 30px; display: flex; flex-direction: column; gap: 15px; }
+
+.admin-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-card);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--primary-red);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: var(--transition);
+}
+
+.admin-item:hover { background: #222; transform: translateX(5px); }
+
+.admin-item img {
+    width: 60px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.admin-item h4 { font-size: 16px; margin-bottom: 5px; }
+.admin-item p { font-size: 12px; color: var(--text-muted); }
+
+.admin-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.admin-actions button {
+    padding: 8px 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    color: white;
+    font-size: 13px;
+    transition: var(--transition);
+}
+
+.admin-actions button:hover { transform: scale(1.05); }
+
+.btn-edit { background: var(--badge-orange); }
+.btn-delete { background: #c0392b; }
+.btn-episode { background: var(--badge-green); }
+
+/* =========================================
+   11. RESPONSIVE DESIGN (Mobile & Tablet)
+   ========================================= */
+@media (max-width: 900px) {
+    .hero { height: 350px; }
+    .hero-overlay h2 { font-size: 24px; }
+    .search-bar input { width: 150px; }
+}
+
+@media (max-width: 768px) {
+    nav { flex-direction: column; gap: 15px; padding: 15px; }
+    .nav-links { width: 100%; justify-content: center; gap: 15px; }
+    .search-bar { width: 100%; }
+    .search-bar input { width: 100%; }
+    
+    .hero { height: 250px; }
+    .hero-overlay { bottom: 20px; left: 20px; right: 20px; padding: 15px; }
+    .hero-overlay h2 { font-size: 20px; }
+    
+    .anime-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+    .anime-card img { height: 180px; }
+    
+    #detailsContainer { flex-direction: column; padding: 20px; }
+    #detailsContainer img { width: 100%; max-width: 300px; margin: auto; }
+    #detailsContainer h1 { font-size: 26px; text-align: center; }
+    #detailsContainer .meta-info { justify-content: center; }
+    
+    .admin-item { flex-direction: column; align-items: flex-start; gap: 15px; }
+    .admin-item img { width: 100%; height: 200px; }
+    .admin-actions { width: 100%; justify-content: space-between; }
+}
+
+@media (max-width: 480px) {
+    .section-title { font-size: 18px; }
+    .anime-grid { grid-template-columns: repeat(2, 1fr); }
+    .btn { width: 100%; padding: 10px; }
+    .watch-actions { flex-direction: column; }
+}
